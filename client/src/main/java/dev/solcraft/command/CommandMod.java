@@ -1,4 +1,4 @@
-package com.example.example_mod.dev.solcraft.command;
+package dev.solcraft.command;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

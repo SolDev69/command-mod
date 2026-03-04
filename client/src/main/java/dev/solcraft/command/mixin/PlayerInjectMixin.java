@@ -1,6 +1,6 @@
-package com.example.example_mod.mixin;
+package dev.solcraft.command.mixin;
 
-import com.example.example_mod.dev.solcraft.command.*;
+import dev.solcraft.command.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.mob.player.ClientPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;

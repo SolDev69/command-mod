@@ -1,4 +1,4 @@
-package com.example.example_mod.dev.solcraft.command;
+package dev.solcraft.command;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

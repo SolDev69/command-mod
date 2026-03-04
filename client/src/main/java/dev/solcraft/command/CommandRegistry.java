@@ -1,8 +1,7 @@
-package com.example.example_mod.dev.solcraft.command;
+package dev.solcraft.command;
 
 import net.minecraft.client.Minecraft;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
