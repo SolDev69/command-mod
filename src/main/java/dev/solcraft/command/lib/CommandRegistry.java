@@ -1,5 +1,8 @@
-package dev.solcraft.command;
+package dev.solcraft.command.lib;
 
+import dev.solcraft.command.commands.HelpCommand;
+import dev.solcraft.command.commands.TeleportCommand;
+import dev.solcraft.command.commands.ToggleFarlandsCommand;
 import net.minecraft.client.Minecraft;
 
 import java.util.HashMap;

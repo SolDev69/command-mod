@@ -1,5 +1,8 @@
-package dev.solcraft.command;
+package dev.solcraft.command.commands;
 
+import dev.solcraft.command.CommandMod;
+import dev.solcraft.command.lib.Command;
+import dev.solcraft.command.lib.CommandName;
 import net.minecraft.client.Minecraft;
 
 @CommandName("/help")

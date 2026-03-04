@@ -1,4 +1,4 @@
-package dev.solcraft.command;
+package dev.solcraft.command.lib;
 
 import net.minecraft.client.Minecraft;
 

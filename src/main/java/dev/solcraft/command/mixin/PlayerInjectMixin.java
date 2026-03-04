@@ -1,6 +1,11 @@
 package dev.solcraft.command.mixin;
 
 import dev.solcraft.command.*;
+import dev.solcraft.command.commands.HelpCommand;
+import dev.solcraft.command.commands.TeleportCommand;
+import dev.solcraft.command.commands.ToggleFarlandsCommand;
+import dev.solcraft.command.lib.Command;
+import dev.solcraft.command.lib.CommandRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.mob.player.ClientPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
@@ -27,7 +32,7 @@ public class PlayerInjectMixin {
 	@Overwrite
 	public void sendChat(String content) {
 		if (content.startsWith("/")) {
-			Command	command = new UnknownCommand(minecraft);
+			Command command = new UnknownCommand(minecraft);
 			switch (content.split(" ")[0].split("/")[1]) {
 				case "tp":
 					command = new TeleportCommand(minecraft);

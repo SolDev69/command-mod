@@ -1,5 +1,6 @@
 package dev.solcraft.command;
 
+import dev.solcraft.command.lib.Command;
 import net.minecraft.client.Minecraft;
 
 public class UnknownCommand extends Command {

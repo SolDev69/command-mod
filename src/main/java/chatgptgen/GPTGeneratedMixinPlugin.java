@@ -47,9 +47,8 @@ public class GPTGeneratedMixinPlugin implements IMixinConfigPlugin {
 	}
 
 	private boolean hasAnyMethodWithDesc(String classNameDotOrSlash, String desc) {
-		String internal = classNameDotOrSlash.replace('.', '/'); // IMPORTANT
+		String internal = classNameDotOrSlash.replace('.', '/');
 		String resource = internal + ".class";
-
 		try (InputStream in = getClass().getClassLoader().getResourceAsStream(resource)) {
 			if (in == null) return false;
 
