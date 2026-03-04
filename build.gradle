@@ -21,17 +21,11 @@ def configure(project) {
 		if (project.environment == 'client') {
 			clientOnlyMinecraftJar()
 		}
-		if (project.environment == 'server') {
-			serverOnlyMinecraftJar()
-		}
 	}
 
 	project.ploceus {
 		if (project.environment == 'client') {
 			clientOnlyMappings()
-		}
-		if (project.environment == 'server') {
-			serverOnlyMappings()
 		}
 	}
 

@@ -16,7 +16,7 @@
 	"environment": "${environment}",
 	"entrypoints": {
 		"init": [
-			"com.example.example_mod.ExampleMod"
+			"com.example.example_mod.dev.solcraft.command.CommandMod"
 		]
 	},
 	"mixins": [
@@ -24,7 +24,7 @@
 	],
 	"depends": {
 		"fabricloader": ">=0.14.21",
-		"minecraft": "1.2.5",
+		"minecraft": "*",
 		"osl-entrypoints": ">=0.4.0"
 	}
 }
