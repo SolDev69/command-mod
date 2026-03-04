@@ -3,7 +3,6 @@ package dev.solcraft.command.lib;
 import dev.solcraft.command.UnknownCommand;
 import dev.solcraft.command.commands.*;
 import net.minecraft.client.Minecraft;
-import org.apache.logging.log4j.core.tools.picocli.CommandLine;
 
 import java.util.HashMap;
 import java.util.Map;
