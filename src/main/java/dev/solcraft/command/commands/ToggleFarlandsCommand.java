@@ -2,16 +2,19 @@ package dev.solcraft.command.commands;
 
 import dev.solcraft.command.CommandMod;
 import dev.solcraft.command.lib.Command;
-import dev.solcraft.command.lib.CommandName;
 import net.minecraft.client.Minecraft;
 
 import static chatgptgen.GPTGeneratedMixinPlugin.*;
 
-@CommandName("/farlands")
 public class ToggleFarlandsCommand extends Command {
     public ToggleFarlandsCommand(Minecraft mc) {
         super(mc);
     }
+
+	@Override
+	public String commandName() {
+		return "/farlands";
+	}
 
     @Override
     public void runCommand(String input) {
