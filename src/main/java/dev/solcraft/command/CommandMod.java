@@ -1,6 +1,6 @@
 package dev.solcraft.command;
 
-import dev.solcraft.command.lib.CommandRegistry;
+import chatgptgen.CommandRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

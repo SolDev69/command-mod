@@ -1,8 +1,7 @@
-package dev.solcraft.command.lib;
+package chatgptgen;
 
-import dev.solcraft.command.commands.HelpCommand;
-import dev.solcraft.command.commands.TeleportCommand;
-import dev.solcraft.command.commands.ToggleFarlandsCommand;
+import dev.solcraft.command.lib.*;
+import dev.solcraft.command.commands.*;
 import net.minecraft.client.Minecraft;
 
 import java.util.HashMap;

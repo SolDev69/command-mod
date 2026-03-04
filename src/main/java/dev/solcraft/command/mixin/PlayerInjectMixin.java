@@ -5,7 +5,7 @@ import dev.solcraft.command.commands.HelpCommand;
 import dev.solcraft.command.commands.TeleportCommand;
 import dev.solcraft.command.commands.ToggleFarlandsCommand;
 import dev.solcraft.command.lib.Command;
-import dev.solcraft.command.lib.CommandRegistry;
+import chatgptgen.CommandRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.mob.player.ClientPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
