@@ -37,7 +37,7 @@ public class PerlinNoiseMixinNew {
 			double e = (double)x * d * scaleX;
 			double f = (double)y * d * scaleY;
 			double g = (double)z * d * scaleZ;
-			if (CommandMod.genFarlands) {
+			if (!CommandMod.genFarlands) {
 				long l = MathHelper.lfloor(e);
 				long m = MathHelper.lfloor(g);
 				e -= (double) l;

@@ -10,14 +10,18 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Set;
 
-public class YourMixinPlugin implements IMixinConfigPlugin {
-	private static final String TARGET_CLASS_DOT = "net.minecraft.world.gen.noise.PerlinNoise";
+public class GPTGeneratedMixinPlugin implements IMixinConfigPlugin {
 
-	private static final String NAME = "getRegion";
-	private static final String DESC_INT_XYZ    = "([DIIIIIIDDD)[D"; // values + int,int,int + sizeX,Y,Z + scaleX,Y,Z
-	private static final String DESC_DOUBLE_XYZ = "([DDDDIIIDDD)[D"; // values + double,double,double + sizeX,Y,Z + scaleX,Y,Z
+	public static boolean HAS_REGION_INT_XYZ;
 
-	@Override public void onLoad(String mixinPackage) {}
+	// int x,y,z version (what you say b1.8+ has)
+	public static final String DESC_INT_XYZ = "([DIIIIIIDDD)[D";
+
+	@Override
+	public void onLoad(String mixinPackage) {
+		// nothing needed here
+	}
+
 	@Override public String getRefMapperConfig() { return null; }
 	@Override public void acceptTargets(Set<String> myTargets, Set<String> otherTargets) {}
 	@Override public List<String> getMixins() { return null; }
@@ -26,14 +30,26 @@ public class YourMixinPlugin implements IMixinConfigPlugin {
 
 	@Override
 	public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
+		// Only do detection for the mixin that targets the noise class
 		if (mixinClassName.endsWith("NoiseMixinNew")) {
-			return hasMethod(TARGET_CLASS_DOT, NAME, DESC_INT_XYZ);
+
+			// targetClassName is INTERNAL NAME like "net/minecraft/unmapped/C_12345"
+			HAS_REGION_INT_XYZ = hasAnyMethodWithDesc(targetClassName, DESC_INT_XYZ);
+			System.out.println("[Farlands] targetClassName=" + targetClassName
+				+ " resourceExists=" + (getClass().getClassLoader().getResource(
+				targetClassName.replace('.', '/') + ".class"
+			) != null)
+				+ " hasDesc=" + HAS_REGION_INT_XYZ);
+			// Apply mixin only on versions that have the int signature
+			return HAS_REGION_INT_XYZ;
 		}
 		return true;
 	}
 
-	private boolean hasMethod(String classDotName, String name, String desc) {
-		String resource = classDotName.replace('.', '/') + ".class";
+	private boolean hasAnyMethodWithDesc(String classNameDotOrSlash, String desc) {
+		String internal = classNameDotOrSlash.replace('.', '/'); // IMPORTANT
+		String resource = internal + ".class";
+
 		try (InputStream in = getClass().getClassLoader().getResourceAsStream(resource)) {
 			if (in == null) return false;
 
@@ -42,7 +58,7 @@ public class YourMixinPlugin implements IMixinConfigPlugin {
 			cr.accept(cn, ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES);
 
 			for (MethodNode mn : cn.methods) {
-				if (mn.name.equals(name) && mn.desc.equals(desc)) return true;
+				if (mn.desc.equals(desc)) return true;
 			}
 			return false;
 		} catch (Throwable t) {
