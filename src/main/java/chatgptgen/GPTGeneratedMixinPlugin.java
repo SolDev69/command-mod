@@ -1,5 +1,6 @@
 package chatgptgen;
 
+import org.lwjgl.Sys;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.MethodNode;
@@ -15,7 +16,7 @@ public class GPTGeneratedMixinPlugin implements IMixinConfigPlugin {
 	public static boolean HAS_REGION_INT_XYZ;
 
 	// int x,y,z version (what you say b1.8+ has)
-	public static final String DESC_INT_XYZ = "([DIIIIIIDDD)[D";
+//	public static final String DESC_INT_XYZ = "([DIIIIIIDDD)[D";
 
 	@Override
 	public void onLoad(String mixinPackage) {
@@ -30,38 +31,36 @@ public class GPTGeneratedMixinPlugin implements IMixinConfigPlugin {
 
 	@Override
 	public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
+		String version = System.getProperty("fabric.gameVersion");
+		boolean isReleaseOrBeta1_8 = version.startsWith("1.") || version.startsWith("b1.8");
 		// Only do detection for the mixin that targets the noise class
 		if (mixinClassName.endsWith("NoiseMixinNew")) {
-
-			// targetClassName is INTERNAL NAME like "net/minecraft/unmapped/C_12345"
-			HAS_REGION_INT_XYZ = hasAnyMethodWithDesc(targetClassName, DESC_INT_XYZ);
-			System.out.println("[Farlands] targetClassName=" + targetClassName
-				+ " resourceExists=" + (getClass().getClassLoader().getResource(
-				targetClassName.replace('.', '/') + ".class"
-			) != null)
-				+ " hasDesc=" + HAS_REGION_INT_XYZ);
-			// Apply mixin only on versions that have the int signature
-			return HAS_REGION_INT_XYZ;
+			return isReleaseOrBeta1_8;
+		}
+		if (mixinClassName.endsWith("PlayerAccessor")) {
+			return isReleaseOrBeta1_8;
 		}
 		return true;
 	}
 
-	private boolean hasAnyMethodWithDesc(String classNameDotOrSlash, String desc) {
-		String internal = classNameDotOrSlash.replace('.', '/');
-		String resource = internal + ".class";
-		try (InputStream in = getClass().getClassLoader().getResourceAsStream(resource)) {
-			if (in == null) return false;
 
-			ClassReader cr = new ClassReader(in);
-			ClassNode cn = new ClassNode();
-			cr.accept(cn, ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES);
 
-			for (MethodNode mn : cn.methods) {
-				if (mn.desc.equals(desc)) return true;
-			}
-			return false;
-		} catch (Throwable t) {
-			return false;
-		}
-	}
+//	private boolean hasAnyMethodWithDesc(String classNameDotOrSlash, String desc) {
+//		String internal = classNameDotOrSlash.replace('.', '/');
+//		String resource = internal + ".class";
+//		try (InputStream in = getClass().getClassLoader().getResourceAsStream(resource)) {
+//			if (in == null) return false;
+//
+//			ClassReader cr = new ClassReader(in);
+//			ClassNode cn = new ClassNode();
+//			cr.accept(cn, ClassReader.SKIP_DEBUG | ClassReader.SKIP_FRAMES);
+//
+//			for (MethodNode mn : cn.methods) {
+//				if (mn.desc.equals(desc)) return true;
+//			}
+//			return false;
+//		} catch (Throwable t) {
+//			return false;
+//		}
+//	}
 }
