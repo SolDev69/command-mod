@@ -18,6 +18,7 @@ public class CommandMod implements ModInitializer {
 	public static boolean genFarlands = false;
 	public static List<String> pastChats = new ArrayList<>();
 	public static CommandRegistry theCommandRegistry;
+	public static boolean isFlying = false;
 	@Override
 	public void init() {
 		LOGGER.info("initializing commands");

@@ -33,13 +33,17 @@ public class GPTGeneratedMixinPlugin implements IMixinConfigPlugin {
 	public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
 		String version = System.getProperty("fabric.gameVersion");
 		boolean isReleaseOrBeta1_8 = version.startsWith("1.") || version.startsWith("b1.8");
-		// Only do detection for the mixin that targets the noise class
 		if (mixinClassName.endsWith("NoiseMixinNew")) {
 			return isReleaseOrBeta1_8;
 		}
 		if (mixinClassName.endsWith("PlayerAccessor")) {
 			return isReleaseOrBeta1_8;
 		}
+
+		if (mixinClassName.contains("light")) {
+			return false; // TODO: fix flight
+		}
+
 		return true;
 	}
 

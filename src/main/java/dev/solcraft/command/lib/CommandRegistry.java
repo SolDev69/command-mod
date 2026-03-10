@@ -19,10 +19,12 @@ public class CommandRegistry {
 		HelpCommand helpCommand = new HelpCommand(mc);
 		TeleportCommand teleportCommand = new TeleportCommand(mc);
 		ToggleFarlandsCommand toggleFarlandsCommand = new ToggleFarlandsCommand(mc);
+		GamemodeCommand gamemodeCommand = new GamemodeCommand(mc);
 
 		commands.put(helpCommand.commandName(), helpCommand);
 		commands.put(teleportCommand.commandName(), teleportCommand);
 		commands.put(toggleFarlandsCommand.commandName(), toggleFarlandsCommand);
+		commands.put(gamemodeCommand.commandName(), gamemodeCommand);
 	}
 
 	public Map<String, Command> getCommandsObject() {
